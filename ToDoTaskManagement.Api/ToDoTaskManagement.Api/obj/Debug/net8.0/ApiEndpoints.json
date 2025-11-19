@@ -1,0 +1,97 @@
+[
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "GetAll",
+    "RelativePath": "api/Todos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "Create",
+    "RelativePath": "api/Todos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ToDoTaskManagement.Application.DTOs.CreateTodoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "Get",
+    "RelativePath": "api/Todos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "Update",
+    "RelativePath": "api/Todos/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ToDoTaskManagement.Application.DTOs.UpdateTodoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "Delete",
+    "RelativePath": "api/Todos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoTaskManagement.Api.Controllers.TodosController",
+    "Method": "Toggle",
+    "RelativePath": "api/Todos/{id}/toggle",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
