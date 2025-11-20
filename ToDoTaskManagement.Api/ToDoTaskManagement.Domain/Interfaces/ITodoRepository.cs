@@ -9,11 +9,11 @@ namespace ToDoTaskManagement.Domain.Interfaces
 {
     public interface ITodoRepository
     {
-        Task<List<TodoItem>> GetAllAsync();
-        Task<TodoItem?> GetByIdAsync(int id);
-        Task AddAsync(TodoItem item);
-        Task UpdateAsync(TodoItem item);
-        Task DeleteAsync(TodoItem item);
-        Task SaveChangesAsync();
+        Task<List<TodoItem>> GetAllAsync(string userId, CancellationToken ct = default);
+        Task<TodoItem?> GetByIdAsync(int id, string userId, CancellationToken ct = default);
+        Task AddAsync(TodoItem item, CancellationToken ct = default);
+        Task UpdateAsync(TodoItem item, CancellationToken ct = default);
+        Task DeleteAsync(int id, string userId, CancellationToken ct = default);
+        Task SaveChangesAsync(CancellationToken ct = default);
     }
 }

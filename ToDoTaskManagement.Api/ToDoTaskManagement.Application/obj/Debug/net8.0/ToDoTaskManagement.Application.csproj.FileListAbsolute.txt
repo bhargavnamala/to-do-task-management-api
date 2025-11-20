@@ -10,3 +10,4 @@ D:\Storage\Lemon-Test\api\ToDoTaskManagement.Api\ToDoTaskManagement.Application\
 D:\Storage\Lemon-Test\api\ToDoTaskManagement.Api\ToDoTaskManagement.Application\obj\Debug\net8.0\refint\ToDoTaskManagement.Application.dll
 D:\Storage\Lemon-Test\api\ToDoTaskManagement.Api\ToDoTaskManagement.Application\obj\Debug\net8.0\ToDoTaskManagement.Application.pdb
 D:\Storage\Lemon-Test\api\ToDoTaskManagement.Api\ToDoTaskManagement.Application\obj\Debug\net8.0\ref\ToDoTaskManagement.Application.dll
+D:\Storage\Lemon-Test\api\ToDoTaskManagement.Api\ToDoTaskManagement.Application\obj\Debug\net8.0\ToDoTaskManagement.Application.csproj.AssemblyReference.cache

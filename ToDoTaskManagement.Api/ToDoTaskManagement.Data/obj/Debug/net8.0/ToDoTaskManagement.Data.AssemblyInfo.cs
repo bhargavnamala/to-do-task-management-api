@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ToDoTaskManagement.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23f723bdc21032765dfb1d9d75c97a7cd81e13b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad51851d54226dbf3580a2b47b28b7d8b7461b66")]
 [assembly: System.Reflection.AssemblyProductAttribute("ToDoTaskManagement.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ToDoTaskManagement.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

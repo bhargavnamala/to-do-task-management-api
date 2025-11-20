@@ -1,67 +1,127 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ToDoTaskManagement.Application.DTOs;
-using ToDoTaskManagement.Domain.Interfaces;
+using ToDoTaskManagement.Application.Interfaces;
 
 namespace ToDoTaskManagement.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TodosController : ControllerBase
     {
-        private readonly ITodoService _service;
+        private readonly ITodoAppService _app;
+        private readonly ILogger<TodosController> _logger;
 
-        public TodosController(ITodoService service)
+        private string CurrentUserId =>
+            User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+
+        public TodosController(
+            ITodoAppService app,
+            ILogger<TodosController> logger)
         {
-            _service = service;
+            _app = app;
+            _logger = logger;
         }
 
-        // GET api/todos
+        // GET: api/todos
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var list = await _service.GetAllAsync();
+            _logger.LogInformation("Fetching todo list for user {UserId}", CurrentUserId);
+
+            var list = await _app.GetAllAsync(CurrentUserId);
             return Ok(list);
         }
 
-        // GET api/todos/5
+        // GET: api/todos/{id}
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var item = await _service.GetByIdAsync(id);
-            return item == null ? NotFound() : Ok(item);
+            _logger.LogInformation("Fetching todo {TodoId} for user {UserId}", id, CurrentUserId);
+
+            var todo = await _app.GetAsync(id, CurrentUserId);
+            if (todo == null)
+            {
+                _logger.LogWarning("Todo {TodoId} not found for user {UserId}", id, CurrentUserId);
+                return NotFound();
+            }
+
+            return Ok(todo);
         }
 
-        // POST api/todos
+        // POST: api/todos
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTodoDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto?.Title)) return BadRequest(new { error = "Title is required" });
-            var created = await _service.CreateAsync(dto);
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Invalid CreateTodoDto received");
+                return BadRequest(ModelState);
+            }
+
+            _logger.LogInformation("Creating todo for user {UserId}", CurrentUserId);
+
+            var created = await _app.CreateAsync(CurrentUserId, dto);
+
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
-        // PUT api/todos/5
+        // PUT: api/todos/{id}
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateTodoDto dto)
         {
-            var updated = await _service.UpdateAsync(id, dto);
-            return updated == null ? NotFound() : Ok(updated);
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Invalid UpdateTodoDto received for todo {TodoId}", id);
+                return BadRequest(ModelState);
+            }
+
+            _logger.LogInformation("Updating todo {TodoId} for user {UserId}", id, CurrentUserId);
+
+            var updated = await _app.UpdateAsync(id, CurrentUserId, dto);
+            if (updated == null)
+            {
+                _logger.LogWarning("Todo {TodoId} not found during update", id);
+                return NotFound();
+            }
+
+            return Ok(updated);
         }
 
-        // PATCH api/todos/5/toggle
+        // PATCH: api/todos/{id}/toggle
         [HttpPatch("{id:int}/toggle")]
         public async Task<IActionResult> Toggle(int id)
         {
-            var toggled = await _service.ToggleAsync(id);
-            return toggled == null ? NotFound() : Ok(toggled);
+            _logger.LogInformation("Toggling todo {TodoId} for user {UserId}", id, CurrentUserId);
+
+            var toggled = await _app.ToggleAsync(id, CurrentUserId);
+
+            if (toggled == null)
+            {
+                _logger.LogWarning("Todo {TodoId} not found for toggle operation", id);
+                return NotFound();
+            }
+
+            return Ok(toggled);
         }
 
-        // DELETE api/todos/5
+        // DELETE: api/todos/{id}
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var ok = await _service.DeleteAsync(id);
-            return ok ? NoContent() : NotFound();
+            _logger.LogInformation("Deleting todo {TodoId} for user {UserId}", id, CurrentUserId);
+
+            var success = await _app.DeleteAsync(id, CurrentUserId);
+
+            if (!success)
+            {
+                _logger.LogWarning("Todo {TodoId} not found for delete operation", id);
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

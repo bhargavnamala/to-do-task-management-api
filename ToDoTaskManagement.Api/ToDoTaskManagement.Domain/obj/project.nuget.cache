@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "G7yJ3GyuC7I=",
+  "dgSpecHash": "ul0wftmaSVs=",
   "success": true,
   "projectFilePath": "D:\\Storage\\Lemon-Test\\api\\ToDoTaskManagement.Api\\ToDoTaskManagement.Domain\\ToDoTaskManagement.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\namal\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\namal\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+    "C:\\Users\\namal\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
+    "C:\\Users\\namal\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

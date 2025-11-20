@@ -8,7 +8,7 @@ namespace ToDoTaskManagement.Application.DTOs
 {
     public class UpdateTodoDto
     {
-        public required string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public bool? IsCompleted { get; set; }
         public string? Description { get; set; }
     }
